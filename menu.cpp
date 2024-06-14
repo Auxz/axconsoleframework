@@ -97,7 +97,7 @@ namespace ax {
 
             }
         }
-        void SendToInputHandler(char *inputBuffer, const HANDLE* outputHandle) 
+        void SendToInputHandler(char[] *inputBuffer, const HANDLE* outputHandle) 
         {
             std::string contents = std::to_string(*inputBuffer);
             if(contents == NAVIGATION_UP || NAVIGATION_DOWN || NAVIGATION_LEFT || NAVIGATION_RIGHT || NAVIGATION_ENTER || NAVIGATION_BACKSPACE || NAVIGATION_ESC)
@@ -117,7 +117,7 @@ namespace ax {
             char inputBuffer[8];
             DWORD numberOfChars = 8;
             DWORD readChars;
-            
+
             while(true) 
             {
             ReadConsole(hIn, &inputBuffer, numberOfChars, &readChars, NULL);
