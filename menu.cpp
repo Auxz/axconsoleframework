@@ -93,22 +93,24 @@ namespace ax {
 
     };
     namespace userinput {
-        void NavigateMenu(const std::string sequence, HANDLE* outputHandle) 
+        /* void NavigateMenu(const char[] sequence, HANDLE* outputHandle) 
         {
             char writeSequence[8];
-            if(sequence == NAVIGATION_UP) 
+            /*if(sequence == NAVIGATION_UP) 
             {
                 writeSequence = NAVIGATION_UP;
-                WriteConsole(&outputHandle, &writeSequence, sizeof(writeSequence), NULL, NULL);
+                
 
-            }
-        }
-        void SendToInputHandler(char[] *inputBuffer, const HANDLE* outputHandle) 
+            } // Likely redundant code need to verify and test
+        } */
+        void SendToInputHandler(char[]* inputBuffer, const HANDLE* outputHandle) 
         {
             std::string contents = std::to_string(*inputBuffer);
             if(contents == NAVIGATION_UP || NAVIGATION_DOWN || NAVIGATION_LEFT || NAVIGATION_RIGHT || NAVIGATION_ENTER || NAVIGATION_BACKSPACE || NAVIGATION_ESC)
             {
-                NavigateMenu(contents)
+                
+                WriteConsole(&outputHandle, inputBuffer, sizeof(inputBuffer), NULL, NULL);
+                //NavigateMenu(*inputBuffer)
 
             }
         }
