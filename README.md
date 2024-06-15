@@ -4,7 +4,7 @@ A single header file library intended to make creating interactive and DOS-style
 Object oriented and extremely easy to use.\
 Small and portable, drag and drop into projects.\
 Keyboard-interactive menus that require little setup.\
-Use control character sequences to improve cross-platform compatibility.\
+Use control character sequences to improve cross-platform compatibility.
 
 
 **Currently a work in progress**
