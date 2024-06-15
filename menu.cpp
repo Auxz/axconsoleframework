@@ -33,14 +33,13 @@ namespace ax {
     
         void displayInformation() {
             std::string optionString;
-            if(m_showId == true) {
-                
+            if(m_showId == true) 
+            {
                 optionString += std::to_string(m_id) + ". ";
-                
             }
             optionString += m_name + " : ";
-            
-            if(m_showDesc == true) {
+            if(m_showDesc == true) 
+            {
                 optionString += m_description;
             }
             std::cout << optionString << std::endl;
@@ -51,10 +50,12 @@ namespace ax {
         protected:
         std::string m_name;
         std::vector<Option*> m_options;
-            BaseMenu(const std::string a_name) {
+            BaseMenu(const std::string a_name) 
+            {
             m_name = a_name;
             }
-            BaseMenu(const std::string a_name, const std::vector<Option*> a_options) { // Overloaded constructor to accept a pointer to a vector of Option object pointers
+            BaseMenu(const std::string a_name, const std::vector<Option*> a_options) // Overloaded constructor to accept a pointer to a vector of Option object pointers
+            { 
             m_name = a_name;
             m_options = a_options;
             }   
@@ -65,20 +66,25 @@ namespace ax {
         public:
         OptionsMenu(const std::string a_name) : BaseMenu(a_name) {}
         OptionsMenu(const std::string a_name, const std::vector<Option*> a_options) : BaseMenu(a_name, a_options) {} 
-        virtual void display(bool displayMenuName) {
-            if (displayMenuName) {
+        virtual void display(bool displayMenuName) 
+        {
+            if (displayMenuName) 
+            {
             std::cout << m_name << std::endl;
             }
-            for(Option* option : m_options) {
+            for(Option* option : m_options) 
+            {
                 std::cout << option->m_name << std::endl;
                 option->displayInformation();
             }
         }
-        void addOption(Option* option) {
+        void addOption(Option* option) 
+        {
             
 
         }
-        Option addOption(const int a_id, const std::string a_name, const std::string a_desc, const bool a_showDesc, const bool a_showId) {
+        Option addOption(const int a_id, const std::string a_name, const std::string a_desc, const bool a_showDesc, const bool a_showId) 
+        {
             Option newOption = Option(a_id, a_name, a_desc, a_showDesc, a_showId);
             m_options.push_back(&newOption);
             return newOption;
