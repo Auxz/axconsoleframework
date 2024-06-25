@@ -3,6 +3,7 @@
 #include <Windows.h>
 #include <iostream>
 #include <vector>
+#include <functional>
 
 class Option
 {
@@ -13,6 +14,7 @@ class Option
     std::string m_description;
     bool m_showDesc;
     bool m_showId;
+    std::function<void()> execute = []{};
 
   private:
     bool m_selected;
@@ -30,13 +32,14 @@ class BaseMenu
 {
   protected:
     std::string m_name;
-    std::vector<Option *> m_options;
+    std::vector<Option*> m_options;
     bool isActive;
     BaseMenu(const std::string a_name);
-    BaseMenu(const std::string a_name,
-             const std::vector<Option *>
-                 a_options); // Overloaded constructor to accept a pointer to a vector of Option object pointers
-    virtual void display();
+    BaseMenu(const std::string a_name, std::vector<Option *> a_options); // Overloaded constructor to accept a pointer to a vector of Option object pointers
+    virtual ~BaseMenu(); // Destructor, needs to be virtual
+    virtual void display() = 0; // Pure virtual methods, need to be overridden in other menu classes
+    virtual void addOption() = 0;
+
 
   public:
     void selectOption(int a_row);
@@ -45,13 +48,13 @@ class BaseMenu
 struct MenuHandler
 {
   private:
-    BaseMenu *m_activeMenu;
+    void *m_activeMenu;
 
   public:
     MenuHandler();
 
-    void setActiveMenu(BaseMenu *a_menu);
-    BaseMenu *getActiveMenu();
+    void setActiveMenu(void *a_menu);
+    auto *getActiveMenu();
 };
 class OptionsMenu : BaseMenu
 {
@@ -62,7 +65,7 @@ class OptionsMenu : BaseMenu
     OptionsMenu(const std::string a_name);
 
     OptionsMenu(const std::string a_name, const std::vector<Option *> a_options);
-    virtual void display(bool displayMenuName = false);
+    void display(bool displayMenuName = false);
     void addOption(Option *option);
     Option addOption(const int a_id, const std::string a_name, const std::string a_desc, const bool a_showDesc = false,
                      const bool a_showId = false);

@@ -10,6 +10,10 @@
 #define CSI "\x1b["
 #include "menu.hpp"
 
+
+// Options
+
+
 Option::Option(const int a_id, std::string a_name, const std::string a_description, const bool a_showDesc,
                bool const a_showId)
 {
@@ -48,22 +52,28 @@ void Option::displayInformation()
     std::cout << optionString << std::endl;
 }
 
+
+// Menus
+
+
 BaseMenu::BaseMenu(const std::string a_name)
 {
     m_name = a_name;
     isActive = false;
 }
-BaseMenu::BaseMenu(const std::string a_name,
-                   const std::vector<Option *>
-                       a_options) // Overloaded constructor to accept a pointer to a vector of Option object pointers
+BaseMenu::BaseMenu(const std::string a_name, const std::vector<Option *> a_options) // Overloaded constructor to accept a pointer to a vector of Option object pointers
 {
     m_name = a_name;
     m_options = a_options;
     isActive = false;
 }
-void BaseMenu::display()
+BaseMenu::~BaseMenu() 
 {
+
 }
+/*void BaseMenu::display()
+{
+} */
 
 void BaseMenu::selectOption(int a_row)
 {
@@ -93,13 +103,13 @@ MenuHandler::MenuHandler()
 {
 }
 
-void MenuHandler::setActiveMenu(BaseMenu *a_menu)
+void MenuHandler::setActiveMenu(void* a_menu)
 {
     m_activeMenu = a_menu;
 }
-BaseMenu *MenuHandler::getActiveMenu()
+auto *MenuHandler::getActiveMenu()
 {
-    return m_activeMenu;
+    if(sizeof(m_activeMenu)
 }
 
 OptionsMenu::OptionsMenu(const std::string a_name) : BaseMenu(a_name)
